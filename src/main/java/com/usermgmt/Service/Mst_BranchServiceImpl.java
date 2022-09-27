@@ -50,6 +50,8 @@ public class Mst_BranchServiceImpl implements Mst_BranchService{
             temp = mst_branchOptional.get();
         }
 
+        System.out.println(temp);
+
         return temp;
     }
 

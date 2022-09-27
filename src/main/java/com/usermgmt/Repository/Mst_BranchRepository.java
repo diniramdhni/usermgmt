@@ -12,7 +12,7 @@ public interface Mst_BranchRepository extends JpaRepository<Mst_Branch, String> 
     @Query("""
             SELECT br
             FROM Mst_Branch br
-            WHERE br.name LIKE %:name%
+            WHERE UPPER(br.name) LIKE %:name%
             """)
     Page<Mst_Branch> findAllBranch(Pageable page,
                                   @Param("name") String name);

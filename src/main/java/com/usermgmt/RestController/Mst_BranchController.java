@@ -3,6 +3,7 @@ package com.usermgmt.RestController;
 import com.usermgmt.Dto.Mst_BranchInsertDTO;
 import com.usermgmt.Dto.UpdateBranchDTO;
 import com.usermgmt.Entity.Mst_Branch;
+import com.usermgmt.NotFoundException;
 import com.usermgmt.Service.Mst_BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,7 +45,7 @@ public class Mst_BranchController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateBranch(@RequestBody UpdateBranchDTO updateDto,
+    public ResponseEntity<Mst_Branch> updateBranch(@RequestBody UpdateBranchDTO updateDto,
                                                    @RequestParam(required = true)String id){
 
         //findbyid
@@ -53,19 +54,24 @@ public class Mst_BranchController {
         if (branchById != null){
             Mst_Branch branchUpdate = mst_branchService.updateBranchById( updateDto, id);
 
-            return new ResponseEntity<>("Success Update Branch", HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(branchUpdate, HttpStatus.ACCEPTED);
         }else{
 
-            return new ResponseEntity<>("Id Not Found", HttpStatus.BAD_REQUEST);
+            throw new NotFoundException("Branch with Id " + id + " Not Found!");
         }
 
 
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Mst_Branch> deleteBranch(){
-
-        return null;
+    public ResponseEntity<String> deleteBranch(@RequestParam(required = true) String id){
+        Mst_Branch mst_branch = mst_branchService.getBranchById(id);
+        if(mst_branch == null){
+            throw new NotFoundException("Branch with Id " + id + " Not Found!");
+        } else{
+            mst_branchService.deleteById(id);
+            return new ResponseEntity<>("Succes Delete Mst_Branch With Id " + id, HttpStatus.OK);
+        }
     }
 
 
@@ -73,9 +79,15 @@ public class Mst_BranchController {
     @GetMapping("/{branchId}")
     public ResponseEntity<Mst_Branch> searchBranchId(@PathVariable String branchId){
 
+
         Mst_Branch branch = mst_branchService.getBranchById(branchId);
 
-        return new ResponseEntity<>(branch, HttpStatus.FOUND);
+        if(branch == null){
+            throw new NotFoundException("Branch with Id " + branchId + " Not Found!");
+        } else{
+            return new ResponseEntity<>(branch, HttpStatus.FOUND);
+        }
+
     }
 
 }

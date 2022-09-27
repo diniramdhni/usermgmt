@@ -19,9 +19,8 @@ public class Mst_Branch {
     private String type;
     @Column(name = "branch_address")
     private String address;
-    @Type(type = "org.hibernate.type.BooleanType")
     @Column(name = "flag_active")
-    private short flag_active;
+    private boolean flag_active;
     @Column(name = "created_by")
     private String created_by;
     @Column(name = "update_by")
@@ -29,7 +28,7 @@ public class Mst_Branch {
 
     Mst_Branch(){}
 
-    public Mst_Branch(String id, String name, String type, String address, short flag_active, String created_by, String update_by) {
+    public Mst_Branch(String id, String name, String type, String address, boolean flag_active, String created_by, String update_by) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -71,11 +70,11 @@ public class Mst_Branch {
         this.address = address;
     }
 
-    public short isFlag_active() {
+    public boolean isFlag_active() {
         return flag_active;
     }
 
-    public void setFlag_active(short flag_active) {
+    public void setFlag_active(boolean flag_active) {
         this.flag_active = flag_active;
     }
 

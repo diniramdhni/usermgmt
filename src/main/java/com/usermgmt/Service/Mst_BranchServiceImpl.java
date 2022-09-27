@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -36,7 +37,9 @@ public class Mst_BranchServiceImpl implements Mst_BranchService{
     @Override
     public Page<Mst_Branch> getAllBranch(Pageable page, String name) {
 
-        Page<Mst_Branch> grid = mst_branchRepository.findAllBranch(page, name);
+        String name2 = name.toUpperCase(Locale.ROOT);
+
+        Page<Mst_Branch> grid = mst_branchRepository.findAllBranch(page, name2);
         return grid;
     }
 
@@ -69,5 +72,10 @@ public class Mst_BranchServiceImpl implements Mst_BranchService{
         mst_branchRepository.save(branchById);
 
         return branchById;
+    }
+
+    @Override
+    public void deleteById(String id) {
+        mst_branchRepository.deleteById(id);
     }
 }

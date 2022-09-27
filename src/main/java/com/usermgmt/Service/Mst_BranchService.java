@@ -14,4 +14,6 @@ public interface Mst_BranchService {
     Mst_Branch getBranchById(String branchId);
 
     Mst_Branch updateBranchById(UpdateBranchDTO updateDto, String id);
+
+    void deleteById(String id);
 }

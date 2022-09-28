@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "mst_branch")
@@ -21,20 +23,27 @@ public class Mst_Branch {
     private String address;
     @Column(name = "flag_active")
     private boolean flag_active;
+    @Column(name = "created_date")
+    private LocalDateTime created_date;
     @Column(name = "created_by")
     private String created_by;
-    @Column(name = "update_by")
+    @Column(name = "updated_date")
+    private LocalDateTime update_date;
+    @Column(name = "updated_by")
     private String update_by;
 
-    Mst_Branch(){}
+    public Mst_Branch(){}
 
-    public Mst_Branch(String id, String name, String type, String address, boolean flag_active, String created_by, String update_by) {
+
+    public Mst_Branch(String id, String name, String type, String address, boolean flag_active, LocalDateTime created_date, String created_by, LocalDateTime updated_date, String update_by) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.address = address;
         this.flag_active = flag_active;
+        this.created_date = created_date;
         this.created_by = created_by;
+        this.update_date = updated_date;
         this.update_by = update_by;
     }
 
@@ -94,6 +103,22 @@ public class Mst_Branch {
         this.update_by = update_by;
     }
 
+    public LocalDateTime getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(LocalDateTime created_date) {
+        this.created_date = created_date;
+    }
+
+    public LocalDateTime getUpdate_date() {
+        return update_date;
+    }
+
+    public void setUpdate_date(LocalDateTime update_date) {
+        this.update_date = update_date;
+    }
+
     @Override
     public String toString() {
         return "Mst_Branch{" +
@@ -102,7 +127,9 @@ public class Mst_Branch {
                 ", type='" + type + '\'' +
                 ", address='" + address + '\'' +
                 ", flag_active=" + flag_active +
+                ", created_date=" + created_date +
                 ", created_by='" + created_by + '\'' +
+                ", update_date=" + update_date +
                 ", update_by='" + update_by + '\'' +
                 '}';
     }

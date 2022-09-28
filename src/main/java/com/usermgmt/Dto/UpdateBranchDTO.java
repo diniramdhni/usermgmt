@@ -1,22 +1,55 @@
 package com.usermgmt.Dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class UpdateBranchDTO {
 
+    @NotBlank(message="Id is required.")
+    private String id;
+
+    @NotBlank(message="Branch Name is required.")
     private String name;
+
+    @NotBlank(message="Branch Type is required.")
     private String type;
+
+    @NotBlank(message="Branch Address is required.")
     private String address;
-    private String created_by;
+
+    @NotNull(message="Flag active is required.")
+    private boolean flag_active;
+
+
+    @NotBlank(message="Updated By is required.")
     private String update_by;
 
     public UpdateBranchDTO() {
     }
 
-    public UpdateBranchDTO(String name, String type, String address, String created_by, String update_by) {
+    public UpdateBranchDTO(String id, String name, String type, String address, boolean flag_active, String update_by) {
+        this.id = id;
         this.name = name;
         this.type = type;
         this.address = address;
-        this.created_by = created_by;
+        this.flag_active = flag_active;
         this.update_by = update_by;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isFlag_active() {
+        return flag_active;
+    }
+
+    public void setFlag_active(boolean flag_active) {
+        this.flag_active = flag_active;
     }
 
     public String getName() {
@@ -43,14 +76,6 @@ public class UpdateBranchDTO {
         this.address = address;
     }
 
-    public String getCreated_by() {
-        return created_by;
-    }
-
-    public void setCreated_by(String created_by) {
-        this.created_by = created_by;
-    }
-
     public String getUpdate_by() {
         return update_by;
     }
@@ -62,10 +87,11 @@ public class UpdateBranchDTO {
     @Override
     public String toString() {
         return "UpdateBranchDTO{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", address='" + address + '\'' +
-                ", created_by='" + created_by + '\'' +
+                ", flag_active=" + flag_active +
                 ", update_by='" + update_by + '\'' +
                 '}';
     }

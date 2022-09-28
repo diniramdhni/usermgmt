@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -20,14 +21,17 @@ public class Mst_BranchServiceImpl implements Mst_BranchService{
 
     @Override
     public Mst_Branch insertBranch(Mst_BranchInsertDTO dto) {
+
         Mst_Branch mst_branch = new Mst_Branch(
                 dto.getId(),
                 dto.getName(),
                 dto.getType(),
                 dto.getAddress(),
                 dto.isFlag_active(),
+                LocalDateTime.now(),
                 dto.getCreated_by(),
-                dto.getUpdate_by()
+                null,
+                null
         );
        mst_branchRepository.save(mst_branch);
         System.out.println("mst branch: "+mst_branch);
@@ -40,6 +44,8 @@ public class Mst_BranchServiceImpl implements Mst_BranchService{
         String name2 = name.toUpperCase(Locale.ROOT);
 
         Page<Mst_Branch> grid = mst_branchRepository.findAllBranch(page, name2);
+
+        System.out.println("ini grid branch service "+ grid);
         return grid;
     }
 
@@ -64,11 +70,10 @@ public class Mst_BranchServiceImpl implements Mst_BranchService{
             branchById.setName(updateDto.getName());
             branchById.setType(updateDto.getType());
             branchById.setAddress(updateDto.getAddress());
-            branchById.setCreated_by(updateDto.getCreated_by());
-            branchById.setUpdate_by(branchById.getUpdate_by());
+            branchById.setUpdate_date(LocalDateTime.now());
+            branchById.setUpdate_by(updateDto.getUpdate_by());
         }
 
-        System.out.println(branchById);
         mst_branchRepository.save(branchById);
 
         return branchById;
@@ -77,5 +82,22 @@ public class Mst_BranchServiceImpl implements Mst_BranchService{
     @Override
     public void deleteById(String id) {
         mst_branchRepository.deleteById(id);
+    }
+
+    @Override
+    public UpdateBranchDTO getBranchToUpdate(String id) {
+
+        Mst_Branch branchTemp = getBranchById(id);
+
+        UpdateBranchDTO updateBranchDTO = new UpdateBranchDTO(
+                branchTemp.getId(),
+                branchTemp.getName(),
+                branchTemp.getType(),
+                branchTemp.getAddress(),
+                branchTemp.isFlag_active(),
+                branchTemp.getUpdate_by()
+        );
+
+        return updateBranchDTO;
     }
 }

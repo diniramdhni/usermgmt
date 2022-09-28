@@ -1,26 +1,38 @@
 package com.usermgmt.Dto;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class Mst_BranchInsertDTO {
+
+    @NotBlank(message="Id is required.")
     private String id;
+
+    @NotBlank(message="Branch Name is required.")
     private String name;
+
+    @NotBlank(message="Branch Type is required.")
     private String type;
+
+    @NotBlank(message="Branch Address is required.")
     private String address;
+
+    @NotNull(message="Flag active is required.")
     private boolean flag_active;
+
+    @NotBlank(message="Created By is required.")
     private String created_by;
-    private String update_by;
 
     public Mst_BranchInsertDTO(){}
 
-    public Mst_BranchInsertDTO(String id, String name, String type, String address, boolean flag_active, String created_by, String update_by) {
+    public Mst_BranchInsertDTO(String id, String name, String type, String address, boolean flag_active, String created_by) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.address = address;
         this.flag_active = flag_active;
         this.created_by = created_by;
-        this.update_by = update_by;
     }
 
     public String getId() {
@@ -69,13 +81,5 @@ public class Mst_BranchInsertDTO {
 
     public void setCreated_by(String created_by) {
         this.created_by = created_by;
-    }
-
-    public String getUpdate_by() {
-        return update_by;
-    }
-
-    public void setUpdate_by(String update_by) {
-        this.update_by = update_by;
     }
 }

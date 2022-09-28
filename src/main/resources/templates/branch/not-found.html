@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="~{layout :: head}">
+</head>
+<body class="main-body">
+
+
+<nav th:replace="~{layout :: navigation}"></nav>
+
+<header th:replace="~{layout :: header (${breadCrumbs})}"></header>
+
+<main>
+    <div style="text-align: center">
+        <div th:if="${type == 'delete'}">
+            <h1>
+                Sorry, Branch with id <span th:text="${id}"></span> is not found 🗿🗿🗿
+            </h1>
+            <div class="link-container">
+                <a th:href="@{/branchMvc}" class="blue-button">Back to Branch Index</a>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer th:replace="~{layout :: footer}"></footer>
+<th:block th:replace="~{layout :: javascript}"></th:block>
+</body>
+</html>

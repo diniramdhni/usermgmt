@@ -1,4 +1,4 @@
-package com.usermgmt.Dto;
+package com.usermgmt.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

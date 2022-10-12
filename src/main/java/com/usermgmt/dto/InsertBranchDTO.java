@@ -1,10 +1,9 @@
-package com.usermgmt.Dto;
+package com.usermgmt.dto;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class Mst_BranchInsertDTO {
+public class InsertBranchDTO {
 
     @NotBlank(message="Id is required.")
     private String id;
@@ -24,9 +23,9 @@ public class Mst_BranchInsertDTO {
     @NotBlank(message="Created By is required.")
     private String created_by;
 
-    public Mst_BranchInsertDTO(){}
+    public InsertBranchDTO(){}
 
-    public Mst_BranchInsertDTO(String id, String name, String type, String address, boolean flag_active, String created_by) {
+    public InsertBranchDTO(String id, String name, String type, String address, boolean flag_active, String created_by) {
         this.id = id;
         this.name = name;
         this.type = type;

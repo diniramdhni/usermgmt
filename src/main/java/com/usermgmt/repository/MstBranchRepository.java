@@ -1,19 +1,19 @@
-package com.usermgmt.Repository;
+package com.usermgmt.repository;
 
-import com.usermgmt.Entity.Mst_Branch;
+import com.usermgmt.entity.MstBranch;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface Mst_BranchRepository extends JpaRepository<Mst_Branch, String> {
+public interface MstBranchRepository extends JpaRepository<MstBranch, String> {
 
     @Query("""
             SELECT br
-            FROM Mst_Branch br
+            FROM MstBranch br
             WHERE UPPER(br.name) LIKE %:name%
             """)
-    Page<Mst_Branch> findAllBranch(Pageable page,
+    Page<MstBranch> findAllBranch(Pageable page,
                                   @Param("name") String name);
 }

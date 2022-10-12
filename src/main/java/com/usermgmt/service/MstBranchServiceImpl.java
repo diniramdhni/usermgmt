@@ -1,9 +1,9 @@
-package com.usermgmt.Service;
+package com.usermgmt.service;
 
-import com.usermgmt.Dto.Mst_BranchInsertDTO;
-import com.usermgmt.Dto.UpdateBranchDTO;
-import com.usermgmt.Entity.Mst_Branch;
-import com.usermgmt.Repository.Mst_BranchRepository;
+import com.usermgmt.dto.InsertBranchDTO;
+import com.usermgmt.dto.UpdateBranchDTO;
+import com.usermgmt.entity.MstBranch;
+import com.usermgmt.repository.MstBranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,15 +14,15 @@ import java.util.Locale;
 import java.util.Optional;
 
 @Service
-public class Mst_BranchServiceImpl implements Mst_BranchService{
+public class MstBranchServiceImpl implements MstBranchService {
 
     @Autowired
-    private Mst_BranchRepository mst_branchRepository;
+    private MstBranchRepository mst_branchRepository;
 
     @Override
-    public Mst_Branch insertBranch(Mst_BranchInsertDTO dto) {
+    public MstBranch insertBranch(InsertBranchDTO dto) {
 
-        Mst_Branch mst_branch = new Mst_Branch(
+        MstBranch mst_branch = new MstBranch(
                 dto.getId(),
                 dto.getName(),
                 dto.getType(),
@@ -39,21 +39,21 @@ public class Mst_BranchServiceImpl implements Mst_BranchService{
     }
 
     @Override
-    public Page<Mst_Branch> getAllBranch(Pageable page, String name) {
+    public Page<MstBranch> getAllBranch(Pageable page, String name) {
 
         String name2 = name.toUpperCase(Locale.ROOT);
 
-        Page<Mst_Branch> grid = mst_branchRepository.findAllBranch(page, name2);
+        Page<MstBranch> grid = mst_branchRepository.findAllBranch(page, name2);
 
         System.out.println("ini grid branch service "+ grid);
         return grid;
     }
 
     @Override
-    public Mst_Branch getBranchById(String branchId) {
-        Optional<Mst_Branch> mst_branchOptional = mst_branchRepository.findById(branchId);
+    public MstBranch getBranchById(String branchId) {
+        Optional<MstBranch> mst_branchOptional = mst_branchRepository.findById(branchId);
 
-        Mst_Branch temp = null;
+        MstBranch temp = null;
 
         if (mst_branchOptional.isPresent()){
             temp = mst_branchOptional.get();
@@ -63,8 +63,8 @@ public class Mst_BranchServiceImpl implements Mst_BranchService{
     }
 
     @Override
-    public Mst_Branch updateBranchById(UpdateBranchDTO updateDto, String id) {
-        Mst_Branch branchById = getBranchById(id);
+    public MstBranch updateBranchById(UpdateBranchDTO updateDto, String id) {
+        MstBranch branchById = getBranchById(id);
 
         if (branchById != null){
             branchById.setName(updateDto.getName());
@@ -87,7 +87,7 @@ public class Mst_BranchServiceImpl implements Mst_BranchService{
     @Override
     public UpdateBranchDTO getBranchToUpdate(String id) {
 
-        Mst_Branch branchTemp = getBranchById(id);
+        MstBranch branchTemp = getBranchById(id);
 
         UpdateBranchDTO updateBranchDTO = new UpdateBranchDTO(
                 branchTemp.getId(),

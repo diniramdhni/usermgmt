@@ -1,9 +1,9 @@
-package com.usermgmt.MvcController;
+package com.usermgmt.mvcController;
 
-import com.usermgmt.Dto.Mst_BranchInsertDTO;
-import com.usermgmt.Dto.UpdateBranchDTO;
-import com.usermgmt.Entity.Mst_Branch;
-import com.usermgmt.Service.Mst_BranchService;
+import com.usermgmt.dto.InsertBranchDTO;
+import com.usermgmt.dto.UpdateBranchDTO;
+import com.usermgmt.entity.MstBranch;
+import com.usermgmt.service.MstBranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +22,7 @@ import javax.validation.Valid;
 public class ControllerMvc {
 
     @Autowired
-    private Mst_BranchService mst_branchService;
+    private MstBranchService mst_branchService;
 
     private final Integer maxRows = 10;
 
@@ -33,7 +33,7 @@ public class ControllerMvc {
 
         Pageable pageable = PageRequest.of(page - 1, maxRows, Sort.by("id"));
 
-        Page<Mst_Branch> branchGrid = mst_branchService.getAllBranch(pageable, name);
+        Page<MstBranch> branchGrid = mst_branchService.getAllBranch(pageable, name);
 
         model.addAttribute("branchGrid", branchGrid.getContent());
         model.addAttribute("currentPage", page);
@@ -54,7 +54,7 @@ public class ControllerMvc {
             model.addAttribute("type","update");
             model.addAttribute("breadCrumbs","Branch Index / Update Branch");
         } else {
-            Mst_BranchInsertDTO branchDTO = new Mst_BranchInsertDTO();
+            InsertBranchDTO branchDTO = new InsertBranchDTO();
 
             model.addAttribute("branch", branchDTO);
             model.addAttribute("type","insert");
@@ -65,7 +65,7 @@ public class ControllerMvc {
     }
 
     @PostMapping("/insert")
-    public String insertRoom(@Valid @ModelAttribute("branch") Mst_BranchInsertDTO insertDTO,
+    public String insertRoom(@Valid @ModelAttribute("branch") InsertBranchDTO insertDTO,
                              BindingResult bindingResult,
                              Model model){
 
@@ -104,7 +104,7 @@ public class ControllerMvc {
     public String deleteBranchById(@RequestParam(required = true) String id,
                                    Model model){
 
-        Mst_Branch branchById = mst_branchService.getBranchById(id);
+        MstBranch branchById = mst_branchService.getBranchById(id);
 
         if (branchById != null){
 

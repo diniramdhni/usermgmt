@@ -1,17 +1,14 @@
-package com.usermgmt.Entity;
-
-import org.hibernate.annotations.Type;
+package com.usermgmt.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "mst_branch")
-public class Mst_Branch {
+public class MstBranch {
     @Id
     @Column(name = "branch_id")
     private String id;
@@ -32,10 +29,10 @@ public class Mst_Branch {
     @Column(name = "updated_by")
     private String update_by;
 
-    public Mst_Branch(){}
+    public MstBranch(){}
 
 
-    public Mst_Branch(String id, String name, String type, String address, boolean flag_active, LocalDateTime created_date, String created_by, LocalDateTime updated_date, String update_by) {
+    public MstBranch(String id, String name, String type, String address, boolean flag_active, LocalDateTime created_date, String created_by, LocalDateTime updated_date, String update_by) {
         this.id = id;
         this.name = name;
         this.type = type;

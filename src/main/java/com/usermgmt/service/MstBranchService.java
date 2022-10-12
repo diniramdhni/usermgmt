@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 public interface MstBranchService {
     MstBranch insertBranch(InsertBranchDTO dto);
 
-    Page<MstBranch> getAllBranch(Pageable pageable, String name);
 
     MstBranch getBranchById(String branchId);
 
@@ -18,4 +17,6 @@ public interface MstBranchService {
     void deleteById(String id);
 
     UpdateBranchDTO getBranchToUpdate(String id);
+
+    Page<MstBranch> getAllBranch(Pageable pageable, String name, String id, String type, String address, String createdBy, String updatedBy);
 }

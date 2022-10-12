@@ -39,12 +39,18 @@ public class MstBranchController {
 
     @GetMapping("/list")
     public ResponseEntity<Object> listBranch(@RequestParam(defaultValue = "1") Integer page,
-                                                       @RequestParam(defaultValue = "") String name){
+                                             @RequestParam(defaultValue = "") String id,
+                                                       @RequestParam(defaultValue = "") String name,
+                                             @RequestParam(defaultValue = "") String type,
+                                             @RequestParam(defaultValue = "") String address,
+//                                             @RequestParam(defaultValue = "") boolean flagActive,
+                                             @RequestParam(defaultValue = "") String createdBy,
+                                             @RequestParam(defaultValue = "") String updatedBy){
 
         try {
             Pageable pageable = PageRequest.of(page - 1, maxRows, Sort.by("id"));
 
-            Page<MstBranch> grid = mst_branchService.getAllBranch(pageable, name);
+            Page<MstBranch> grid = mst_branchService.getAllBranch(pageable, name, id, type, address, createdBy, updatedBy);
 
             return new ResponseEntity<>(grid, HttpStatus.OK);
         } catch (Exception e){

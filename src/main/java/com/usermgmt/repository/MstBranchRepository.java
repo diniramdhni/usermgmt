@@ -12,8 +12,14 @@ public interface MstBranchRepository extends JpaRepository<MstBranch, String> {
     @Query("""
             SELECT br
             FROM MstBranch br
-            WHERE UPPER(br.name) LIKE %:name%
+            WHERE UPPER(br.name) LIKE %:name% AND br.id LIKE %:id% AND br.type LIKE %:type% AND br.address LIKE %:address%
+            AND (br.createdBy LIKE %:createdBy% OR br.createdBy = null) AND (br.updatedBy LIKE %:updatedBy% OR br.updatedBy = null)
             """)
-    Page<MstBranch> findAllBranch(Pageable page,
-                                  @Param("name") String name);
+    public Page<MstBranch> findAllBranch(Pageable page,
+                                  @Param("name") String name,
+                                  @Param("id") String id,
+                                  @Param("type") String type,
+                                  @Param("address") String address,
+                                  @Param("createdBy") String createdBy,
+                                  @Param("updatedBy") String updatedBy);
 }

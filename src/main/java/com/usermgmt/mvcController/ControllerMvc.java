@@ -28,12 +28,18 @@ public class ControllerMvc {
 
     @GetMapping("/index")
     public String listBranch(@RequestParam(defaultValue = "1") Integer page,
+                             @RequestParam(defaultValue = "") String id,
                              @RequestParam(defaultValue = "") String name,
+                             @RequestParam(defaultValue = "") String type,
+                             @RequestParam(defaultValue = "") String address,
+//                             @RequestParam(defaultValue = "") boolean flag_active,
+                             @RequestParam(defaultValue = "") String createdBy,
+                             @RequestParam(defaultValue = "") String updatedBy,
                              Model model){
 
         Pageable pageable = PageRequest.of(page - 1, maxRows, Sort.by("id"));
 
-        Page<MstBranch> branchGrid = mst_branchService.getAllBranch(pageable, name);
+        Page<MstBranch> branchGrid = mst_branchService.getAllBranch(pageable, name, id, type, address, createdBy, updatedBy);
 
         model.addAttribute("branchGrid", branchGrid.getContent());
         model.addAttribute("currentPage", page);

@@ -39,11 +39,11 @@ public class MstBranchServiceImpl implements MstBranchService {
     }
 
     @Override
-    public Page<MstBranch> getAllBranch(Pageable page, String name) {
+    public Page<MstBranch> getAllBranch(Pageable pageable, String name, String id, String type, String address, String createdBy, String updatedBy) {
 
         String name2 = name.toUpperCase(Locale.ROOT);
 
-        Page<MstBranch> grid = mst_branchRepository.findAllBranch(page, name2);
+        Page<MstBranch> grid = mst_branchRepository.findAllBranch(pageable, name2, id, type, address, createdBy, updatedBy);
 
         System.out.println("ini grid branch service "+ grid);
         return grid;
@@ -70,8 +70,8 @@ public class MstBranchServiceImpl implements MstBranchService {
             branchById.setName(updateDto.getName());
             branchById.setType(updateDto.getType());
             branchById.setAddress(updateDto.getAddress());
-            branchById.setUpdate_date(LocalDateTime.now());
-            branchById.setUpdate_by(updateDto.getUpdate_by());
+            branchById.setUpdatedDate(LocalDateTime.now());
+            branchById.setUpdatedBy(updateDto.getUpdate_by());
         }
 
         mst_branchRepository.save(branchById);
@@ -94,8 +94,8 @@ public class MstBranchServiceImpl implements MstBranchService {
                 branchTemp.getName(),
                 branchTemp.getType(),
                 branchTemp.getAddress(),
-                branchTemp.isFlag_active(),
-                branchTemp.getUpdate_by()
+                branchTemp.isFlagActive(),
+                branchTemp.getUpdatedBy()
         );
 
         return updateBranchDTO;

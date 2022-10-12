@@ -19,29 +19,28 @@ public class MstBranch {
     @Column(name = "branch_address")
     private String address;
     @Column(name = "flag_active")
-    private boolean flag_active;
+    private boolean flagActive;
     @Column(name = "created_date")
-    private LocalDateTime created_date;
+    private LocalDateTime createdDate;
     @Column(name = "created_by")
-    private String created_by;
+    private String createdBy;
     @Column(name = "updated_date")
-    private LocalDateTime update_date;
+    private LocalDateTime updatedDate;
     @Column(name = "updated_by")
-    private String update_by;
+    private String updatedBy;
 
     public MstBranch(){}
 
-
-    public MstBranch(String id, String name, String type, String address, boolean flag_active, LocalDateTime created_date, String created_by, LocalDateTime updated_date, String update_by) {
+    public MstBranch(String id, String name, String type, String address, boolean flagActive, LocalDateTime createdDate, String createdBy, LocalDateTime updatedDate, String updatedBy) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.address = address;
-        this.flag_active = flag_active;
-        this.created_date = created_date;
-        this.created_by = created_by;
-        this.update_date = updated_date;
-        this.update_by = update_by;
+        this.flagActive = flagActive;
+        this.createdDate = createdDate;
+        this.createdBy = createdBy;
+        this.updatedDate = updatedDate;
+        this.updatedBy = updatedBy;
     }
 
     public String getId() {
@@ -76,58 +75,43 @@ public class MstBranch {
         this.address = address;
     }
 
-    public boolean isFlag_active() {
-        return flag_active;
+    public boolean isFlagActive() {
+        return flagActive;
     }
 
-    public void setFlag_active(boolean flag_active) {
-        this.flag_active = flag_active;
+    public void setFlagActive(boolean flagActive) {
+        this.flagActive = flagActive;
     }
 
-    public String getCreated_by() {
-        return created_by;
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreated_by(String created_by) {
-        this.created_by = created_by;
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public String getUpdate_by() {
-        return update_by;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setUpdate_by(String update_by) {
-        this.update_by = update_by;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
-    public LocalDateTime getCreated_date() {
-        return created_date;
+    public LocalDateTime getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setCreated_date(LocalDateTime created_date) {
-        this.created_date = created_date;
+    public void setUpdatedDate(LocalDateTime updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
-    public LocalDateTime getUpdate_date() {
-        return update_date;
+    public String getUpdatedBy() {
+        return updatedBy;
     }
 
-    public void setUpdate_date(LocalDateTime update_date) {
-        this.update_date = update_date;
-    }
-
-    @Override
-    public String toString() {
-        return "Mst_Branch{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", address='" + address + '\'' +
-                ", flag_active=" + flag_active +
-                ", created_date=" + created_date +
-                ", created_by='" + created_by + '\'' +
-                ", update_date=" + update_date +
-                ", update_by='" + update_by + '\'' +
-                '}';
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
     }
 }
